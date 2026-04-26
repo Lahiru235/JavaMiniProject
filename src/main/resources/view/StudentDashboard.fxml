@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="controller.StudentDashboardController"
+            style="-fx-font-size: 13px;">
+
+    <top>
+        <HBox style="-fx-background-color:#117a65; -fx-padding:10;">
+            <Label fx:id="welcomeLabel" style="-fx-text-fill:white; -fx-font-size:14px; -fx-font-weight:bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Logout" onAction="#handleLogout"
+                    style="-fx-background-color:#e74c3c; -fx-text-fill:white;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE" style="-fx-padding:8;">
+
+            <!-- ── TAB 1: My Grades ─────────────────────────── -->
+            <Tab text="My Grades &amp; GPA">
+                <VBox spacing="10" style="-fx-padding:15;">
+                    <Label text="My Grades" style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+                    <HBox spacing="10">
+                        <Button text="Refresh" onAction="#handleViewMyGrades"
+                                style="-fx-background-color:#27ae60; -fx-text-fill:white; -fx-padding:6 16;"/>
+                        <Button text="Check My Full Eligibility" onAction="#handleCheckEligibility"
+                                style="-fx-background-color:#e67e22; -fx-text-fill:white; -fx-padding:6 16;"/>
+                    </HBox>
+                    <Label fx:id="gradeStatusLabel"/>
+                    <Label fx:id="sgpaLabel" style="-fx-font-size:15px; -fx-font-weight:bold; -fx-text-fill:#117a65;"/>
+                    <Label fx:id="cgpaLabel" style="-fx-font-size:15px; -fx-font-weight:bold; -fx-text-fill:#117a65;"/>
+
+                    <TableView fx:id="gradeTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colCourse"   text="Course"  prefWidth="100"/>
+                            <TableColumn fx:id="colCA"       text="CA"      prefWidth="60"/>
+                            <TableColumn fx:id="colCAStatus" text="CA Pass" prefWidth="75"/>
+                            <TableColumn fx:id="colFinal"    text="End"     prefWidth="60"/>
+                            <TableColumn fx:id="colTotal"    text="Total"   prefWidth="65"/>
+                            <TableColumn fx:id="colGrade"    text="Grade"   prefWidth="60"/>
+                            <TableColumn fx:id="colGP"       text="GP"      prefWidth="55"/>
+                        </columns>
+                    </TableView>
+
+                    <Separator/>
+                    <Label text="Combined Eligibility (Attendance + CA):" style="-fx-font-weight:bold;"/>
+                    <Label fx:id="eligibilityLabel" wrapText="true"
+                           style="-fx-font-family: monospace; -fx-font-size:12px;"/>
+                </VBox>
+            </Tab>
+
+            <!-- ── TAB 2: My Attendance ─────────────────────── -->
+            <Tab text="My Attendance">
+                <VBox spacing="10" style="-fx-padding:15;">
+                    <Label text="My Attendance" style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+                    <HBox spacing="10">
+                        <Label text="Course:"/>
+                        <ComboBox fx:id="attCourseCombo" prefWidth="130"/>
+                        <Label text="Type:"/>
+                        <ComboBox fx:id="attTypeCombo" prefWidth="120"/>
+                        <Button text="View" onAction="#handleViewMyAttendance"
+                                style="-fx-background-color:#2980b9; -fx-text-fill:white; -fx-padding:6 16;"/>
+                    </HBox>
+                    <Label fx:id="attStatusLabel"/>
+                    <TableView fx:id="attTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colACourse"  text="Course"    prefWidth="100"/>
+                            <TableColumn fx:id="colAPresent" text="Present"   prefWidth="70"/>
+                            <TableColumn fx:id="colAPct"     text="Raw %"     prefWidth="70"/>
+                            <TableColumn fx:id="colAEff"     text="Eff. %"    prefWidth="70"/>
+                            <TableColumn fx:id="colAElig"    text="Eligible?" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- ── TAB 3: My Medicals ───────────────────────── -->
+            <Tab text="My Medicals">
+                <VBox spacing="10" style="-fx-padding:15;">
+                    <Label text="Submit Medical" style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+                    <GridPane hgap="10" vgap="8">
+                        <Label text="From Date:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <DatePicker fx:id="medFromPicker" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label text="To Date:"   GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                        <DatePicker fx:id="medToPicker"   GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+                        <Label text="Reason:"    GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="medReasonField" prefWidth="300"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                   GridPane.columnSpan="3"/>
+                    </GridPane>
+                    <HBox spacing="10">
+                        <Button text="Submit Medical" onAction="#handleSubmitMedical"
+                                style="-fx-background-color:#27ae60; -fx-text-fill:white; -fx-padding:6 16;"/>
+                        <Button text="View My Medicals" onAction="#handleViewMyMedicals"
+                                style="-fx-background-color:#2980b9; -fx-text-fill:white; -fx-padding:6 12;"/>
+                    </HBox>
+                    <Label fx:id="medStatusLabel"/>
+                    <TableView fx:id="medTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colMedFrom"   text="From"   prefWidth="100"/>
+                            <TableColumn fx:id="colMedTo"     text="To"     prefWidth="100"/>
+                            <TableColumn fx:id="colMedReason" text="Reason" prefWidth="250"/>
+                            <TableColumn fx:id="colMedStatus" text="Status" prefWidth="90"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="My Course Details">
+                <VBox spacing="10" style="-fx-padding:15;">
+                    <Label text="My Course Details" style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+                    <HBox spacing="10">
+                        <Button text="Refresh" onAction="#handleViewMyCourseDetails"
+                                style="-fx-background-color:#2980b9; -fx-text-fill:white; -fx-padding:6 16;"/>
+                    </HBox>
+                    <Label fx:id="courseStatusLabel"/>
+                    <TableView fx:id="courseTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colCourseCode" text="Course" prefWidth="110"/>
+                            <TableColumn fx:id="colCourseName" text="Course Name" prefWidth="300"/>
+                            <TableColumn fx:id="colCourseCredits" text="Credits" prefWidth="90"/>
+                            <TableColumn fx:id="colCourseLecturer" text="Lecturer" prefWidth="200"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="My Timetable">
+                <VBox spacing="10" style="-fx-padding:15;">
+                    <Label text="My Timetable" style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+                    <HBox spacing="10">
+                        <Button text="Refresh" onAction="#handleViewMyTimetable"
+                                style="-fx-background-color:#2980b9; -fx-text-fill:white; -fx-padding:6 16;"/>
+                    </HBox>
+                    <Label fx:id="timetableStatusLabel"/>
+                    <TableView fx:id="timetableTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colTDay" text="Day" prefWidth="110"/>
+                            <TableColumn fx:id="colTStart" text="Start" prefWidth="90"/>
+                            <TableColumn fx:id="colTEnd" text="End" prefWidth="90"/>
+                            <TableColumn fx:id="colTCourse" text="Course" prefWidth="110"/>
+                            <TableColumn fx:id="colTVenue" text="Venue" prefWidth="160"/>
+                            <TableColumn fx:id="colTNote" text="Note" prefWidth="220"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="Course Materials">
+                <VBox spacing="10" style="-fx-padding:15;">
+                    <Label text="Uploaded Course Materials" style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+                    <HBox spacing="10">
+                        <Button text="Refresh" onAction="#handleViewMyMaterials"
+                                style="-fx-background-color:#2980b9; -fx-text-fill:white; -fx-padding:6 16;"/>
+                    </HBox>
+                    <Label fx:id="materialStatusLabel"/>
+                    <TableView fx:id="materialTable" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colMCourse" text="Course" prefWidth="100"/>
+                            <TableColumn fx:id="colMTitle" text="Title" prefWidth="250"/>
+                            <TableColumn fx:id="colMType" text="Type" prefWidth="100"/>
+                            <TableColumn fx:id="colMLink" text="Link/Path" prefWidth="220"/>
+                            <TableColumn fx:id="colMBy" text="Uploaded By" prefWidth="140"/>
+                            <TableColumn fx:id="colMAt" text="Uploaded At" prefWidth="170"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="Notices">
+                <BorderPane>
+                    <center>
+                        <fx:include source="NoticeBoard.fxml"/>
+                    </center>
+                </BorderPane>
+            </Tab>
+
+            <Tab text="My Profile">
+                <VBox spacing="10" style="-fx-padding:15;">
+                    <Label text="My Profile" style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+                    <Label text="Only contact details and profile picture can be changed." style="-fx-text-fill:#666;"/>
+
+                    <GridPane hgap="12" vgap="8">
+                        <Label text="Index Number:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <Label fx:id="profileIndexLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                        <Label text="Full Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <Label fx:id="profileNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                        <Label text="Department:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <Label fx:id="profileDeptLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                        <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="contactEmailField" prefWidth="280" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                        <Label text="Phone:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <TextField fx:id="contactPhoneField" prefWidth="280" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                    </GridPane>
+
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <ImageView fx:id="profileImageView" fitWidth="140" fitHeight="140" preserveRatio="true"
+                                   style="-fx-border-color:#cccccc; -fx-border-width:1;"/>
+                        <VBox spacing="8">
+                            <Button text="Choose Picture" onAction="#handleChooseProfilePicture"
+                                    style="-fx-background-color:#8e44ad; -fx-text-fill:white; -fx-padding:6 16;"/>
+                            <Label fx:id="picturePathLabel" wrapText="true" maxWidth="420"/>
+                        </VBox>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Button text="Update Profile" onAction="#handleUpdateMyProfile"
+                                style="-fx-background-color:#27ae60; -fx-text-fill:white; -fx-padding:6 16;"/>
+                    </HBox>
+
+                    <Label fx:id="profileStatusLabel"/>
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+</BorderPane>

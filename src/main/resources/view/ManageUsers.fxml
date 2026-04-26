@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.ManageUsersController"
+      spacing="10">
+
+    <padding><Insets top="10" right="14" bottom="10" left="14"/></padding>
+
+    <Label text="Manage Users"
+           style="-fx-font-size: 17px; -fx-font-weight: bold;"/>
+
+    <!-- Filter row -->
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Filter by Role:"/>
+        <ComboBox fx:id="roleFilter" onAction="#handleFilter" prefWidth="150"/>
+    </HBox>
+
+    <!-- TABLE -->
+    <TableView fx:id="userTable" prefHeight="260" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId"       text="ID"       prefWidth="50"/>
+            <TableColumn fx:id="colName"     text="Full Name" prefWidth="180"/>
+            <TableColumn fx:id="colUsername" text="Username"  prefWidth="120"/>
+            <TableColumn fx:id="colRole"     text="Role"      prefWidth="100"/>
+            <TableColumn fx:id="colEmail"    text="Email"     prefWidth="210"/>
+        </columns>
+        <placeholder><Label text="No users found."/></placeholder>
+    </TableView>
+
+    <Separator/>
+    <Label text="User Details" style="-fx-font-weight: bold;"/>
+
+    <!-- FORM -->
+    <GridPane hgap="12" vgap="8">
+
+        <Label text="Full Name:"
+               GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="fullNameField" prefWidth="220"
+                   promptText="e.g. Kamal Perera"
+                   GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Username:"
+               GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="usernameField" prefWidth="220"
+                   promptText="e.g. TG1701 or lec006"
+                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Password:"
+               GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <PasswordField fx:id="passwordField" prefWidth="220"
+                       promptText="Leave blank when editing"
+                       GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Email:"
+               GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="emailField" prefWidth="220"
+                   promptText="e.g. kamal@fot.ruh.ac.lk"
+                   GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <Label text="Phone:"
+               GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <TextField fx:id="phoneField" prefWidth="220"
+                   promptText="e.g. 0771234567"
+                   GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+        <Label text="Role:"
+               GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <ComboBox fx:id="roleCombo" prefWidth="220"
+                  GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+        <Label fx:id="deptLabel" text="Department:"
+               GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+        <TextField fx:id="deptField" prefWidth="220"
+                   promptText="e.g. ICT"
+                   GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+
+    </GridPane>
+
+    <Label fx:id="statusLabel" style="-fx-font-size: 12px;"/>
+
+    <!-- BUTTONS -->
+    <HBox spacing="10">
+        <Button text="+ New"  onAction="#handleNew"
+                style="-fx-background-color: #1565C0; -fx-text-fill: white;
+                       -fx-pref-width: 90px; -fx-cursor: hand;"/>
+        <Button text="Save"   onAction="#handleSave"
+                style="-fx-background-color: #2E7D32; -fx-text-fill: white;
+                       -fx-pref-width: 90px; -fx-cursor: hand;"/>
+        <Button text="Delete" onAction="#handleDelete"
+                style="-fx-background-color: #C62828; -fx-text-fill: white;
+                       -fx-pref-width: 90px; -fx-cursor: hand;"/>
+    </HBox>
+
+</VBox>

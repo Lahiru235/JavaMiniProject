@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.NoticeController"
+      prefWidth="860" prefHeight="580">
+
+    <!-- LEFT: List of notices -->
+    <VBox prefWidth="250" spacing="10"
+          style="-fx-background-color: #F5F5F5;
+                 -fx-border-color: #DDDDDD;
+                 -fx-border-width: 0 1 0 0;">
+
+        <padding><Insets top="14" right="10" bottom="14" left="10"/></padding>
+
+        <Label text="Notices"
+               style="-fx-font-size: 15px; -fx-font-weight: bold;"/>
+
+        <ListView fx:id="noticeList" VBox.vgrow="ALWAYS" prefHeight="460"/>
+
+        <HBox spacing="8">
+            <Button fx:id="addBtn" text="+ New"
+                    onAction="#handleAdd"
+                    style="-fx-background-color: #1565C0;
+                           -fx-text-fill: white; -fx-cursor: hand;"/>
+            <Button fx:id="deleteBtn" text="Delete"
+                    onAction="#handleDelete"
+                    style="-fx-background-color: #C62828;
+                           -fx-text-fill: white; -fx-cursor: hand;"/>
+        </HBox>
+    </VBox>
+
+    <!-- RIGHT: Notice detail / edit form -->
+    <VBox HBox.hgrow="ALWAYS" spacing="10"
+          style="-fx-background-color: white;">
+
+        <padding><Insets top="20" right="22" bottom="20" left="22"/></padding>
+
+        <Label text="Title"/>
+        <TextField fx:id="titleField" promptText="Notice title"/>
+
+        <Label text="Content"/>
+        <TextArea fx:id="contentArea"
+                  promptText="Notice content..."
+                  wrapText="true"
+                  prefHeight="300"
+                  VBox.vgrow="ALWAYS"/>
+
+        <Label fx:id="postedBy"
+               style="-fx-text-fill: gray; -fx-font-size: 12px;"/>
+        <Label fx:id="postedDate"
+               style="-fx-text-fill: gray; -fx-font-size: 12px;"/>
+
+        <Label fx:id="statusLabel" style="-fx-font-size: 12px;"/>
+
+        <Button fx:id="saveBtn" text="Save"
+                onAction="#handleSave"
+                style="-fx-background-color: #2E7D32;
+                       -fx-text-fill: white;
+                       -fx-pref-width: 100px;
+                       -fx-cursor: hand;"/>
+    </VBox>
+
+</HBox>

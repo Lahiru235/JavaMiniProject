@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.ManageTimetablesController"
+      spacing="10">
+
+    <padding><Insets top="10" right="14" bottom="10" left="14"/></padding>
+
+    <Label text="Manage Timetables"
+           style="-fx-font-size: 17px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="timetableTable" prefHeight="280" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colDept" text="Dept" prefWidth="90"/>
+            <TableColumn fx:id="colCourse" text="Course" prefWidth="90"/>
+            <TableColumn fx:id="colDay" text="Day" prefWidth="95"/>
+            <TableColumn fx:id="colStart" text="Start" prefWidth="70"/>
+            <TableColumn fx:id="colEnd" text="End" prefWidth="70"/>
+            <TableColumn fx:id="colVenue" text="Venue" prefWidth="120"/>
+            <TableColumn fx:id="colNote" text="Note" prefWidth="200"/>
+        </columns>
+        <placeholder><Label text="No timetable entries found."/></placeholder>
+    </TableView>
+
+    <Separator/>
+    <Label text="Timetable Details" style="-fx-font-weight: bold;"/>
+
+    <GridPane hgap="12" vgap="8">
+        <Label text="Department:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="deptField" prefWidth="180"
+                   promptText="e.g. ICT" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Course:" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+        <TextField fx:id="courseField" prefWidth="150"
+                   promptText="e.g. ICT2132" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+        <Label text="Day:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <ComboBox fx:id="dayCombo" prefWidth="180" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Start (HH:mm):" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+        <TextField fx:id="startField" prefWidth="150"
+                   promptText="08:30" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+        <Label text="End (HH:mm):" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="endField" prefWidth="180"
+                   promptText="10:30" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Venue:" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+        <TextField fx:id="venueField" prefWidth="150"
+                   promptText="Lab 2" GridPane.columnIndex="3" GridPane.rowIndex="2"/>
+
+        <Label text="Note:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="noteField" prefWidth="450"
+                   promptText="Optional note" GridPane.columnIndex="1" GridPane.rowIndex="3"
+                   GridPane.columnSpan="3"/>
+    </GridPane>
+
+    <Label fx:id="statusLabel" style="-fx-font-size: 12px;"/>
+
+    <HBox spacing="10">
+        <Button text="+ New" onAction="#handleNew"
+                style="-fx-background-color: #1565C0; -fx-text-fill: white;
+                       -fx-pref-width: 90px; -fx-cursor: hand;"/>
+        <Button text="Save" onAction="#handleSave"
+                style="-fx-background-color: #2E7D32; -fx-text-fill: white;
+                       -fx-pref-width: 90px; -fx-cursor: hand;"/>
+        <Button text="Delete" onAction="#handleDelete"
+                style="-fx-background-color: #C62828; -fx-text-fill: white;
+                       -fx-pref-width: 90px; -fx-cursor: hand;"/>
+    </HBox>
+</VBox>
